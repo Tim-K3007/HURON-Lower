@@ -18,5 +18,8 @@ right_roll.move_motor(5, 0, 0)
 right_knee.move_motor(0, 0, 0)
 right_roll.move_motor(-5, 0, 0)
 
+right_knee.move_motor(0, 0, 0)
+right_roll.move_motor(0, 0, 0)
+
 right_roll.kill_motor()
 right_knee.kill_motor()
