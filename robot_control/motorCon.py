@@ -12,7 +12,7 @@ class motorCon:
 
         self.change_state("calib")
         print("Calibrating...")
-        time.sleep(15)
+        # time.sleep(15)
 
         self.send_cmd('Set_Controller_Mode', {'Input_Mode':1, 'Control_Mode':3})
 
@@ -20,7 +20,7 @@ class motorCon:
         print("Entering closed loop")
         time.sleep(1)
         
-        self.send_cmd('Set_Limits', {'Velocity_Limit':10.0, 'Current_Limit':70.0})
+        self.send_cmd('Set_Limits', {'Velocity_Limit':4.0, 'Current_Limit':70.0})
 
     def move_motor(self, pos, vel, tor):
         msg = self.db.get_message_by_name('Set_Input_Pos')

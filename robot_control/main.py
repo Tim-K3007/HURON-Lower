@@ -1,16 +1,22 @@
 from motorCon import motorCon
 import time
 
-testmotor = motorCon("can0", 0x0)
-secondtest = motorCon("can1", 0x2)
-print("going to pos 1")
-testmotor.move_motor(1, 0, 0)
-time.sleep(2)
-print("going to pos 0.5")
-testmotor.move_motor(0.5, 0, 0)
-time.sleep(2)
-print("going to pos -1")
-testmotor.move_motor(-1, 0, 0)
-time.sleep(2)
-testmotor.kill_motor()
-secondtest.kill_motor()
+right_roll = motorCon("can0", 0x1)
+right_knee = motorCon("can0", 0x0)
+time.sleep(15)
+
+# for x in range(10):
+#     if x % 2 == 0:
+#         right_knee.move_motor(10, 0, 0) 
+#         right_roll.move_motor(5, 0, 0)
+#     else:
+#         right_knee.move_motor(0, 0, 0)
+#         right_roll.move_motor(-5, 0, 0)
+
+right_knee.move_motor(10, 0, 0) 
+right_roll.move_motor(5, 0, 0)
+right_knee.move_motor(0, 0, 0)
+right_roll.move_motor(-5, 0, 0)
+
+right_roll.kill_motor()
+right_knee.kill_motor()
