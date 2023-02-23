@@ -14,6 +14,15 @@ class motorCon:
         print("Calibrating...")
         # time.sleep(15)
 
+        # self.send_cmd('Set_Controller_Mode', {'Input_Mode':1, 'Control_Mode':3})
+
+        # self.change_state("closeloop")
+        # print("Entering closed loop")
+        # time.sleep(1)
+        
+        # self.send_cmd('Set_Limits', {'Velocity_Limit':4.0, 'Current_Limit':70.0})
+
+    def set_up(self):
         self.send_cmd('Set_Controller_Mode', {'Input_Mode':1, 'Control_Mode':3})
 
         self.change_state("closeloop")
@@ -27,6 +36,13 @@ class motorCon:
         data = msg.encode({'Input_Pos':pos, 'Vel_FF':vel, 'Torque_FF':tor})
         msg = can.Message(arbitration_id=self.axis << 5 | msg.frame_id, data=data, is_extended_id=False)
         self.bus.send(msg)
+
+        msg = self.bus.recv()
+        arbID = ((self.axisID << 5) | self.db.get_message_by_name('Heartbeat').frame_id)
+
+        while(not (msg.arbitration_id == arbID and msg.data[0] & 0x01)):
+            print("waiting")
+
 
     def kill_motor(self):
         self.change_state("idle")
