@@ -42,6 +42,7 @@ class motorCon:
 
         while(not (msg.arbitration_id == arbID and msg.data[0] & 0x01)):
             print("waiting")
+        print("done")
 
 
     def kill_motor(self):
