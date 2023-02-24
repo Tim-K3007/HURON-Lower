@@ -12,15 +12,6 @@ class motorCon:
 
         self.change_state("calib")
         print("Calibrating...")
-        # time.sleep(15)
-
-        # self.send_cmd('Set_Controller_Mode', {'Input_Mode':1, 'Control_Mode':3})
-
-        # self.change_state("closeloop")
-        # print("Entering closed loop")
-        # time.sleep(1)
-        
-        # self.send_cmd('Set_Limits', {'Velocity_Limit':4.0, 'Current_Limit':70.0})
 
     def set_up(self):
         self.send_cmd('Set_Controller_Mode', {'Input_Mode':1, 'Control_Mode':3})
@@ -37,9 +28,10 @@ class motorCon:
         msg = can.Message(arbitration_id=self.axis << 5 | msg.frame_id, data=data, is_extended_id=False)
         self.bus.send(msg)
 
+        # not working maybe add a sleep here
         msg = self.bus.recv()
         arbID = ((self.axis << 5) | self.db.get_message_by_name('Heartbeat').frame_id)
-
+        # use a better print here besides waiting
         while(not (msg.arbitration_id == arbID and msg.data[0] & 0x01)):
             print("waiting")
         print("done")
