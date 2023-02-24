@@ -38,7 +38,7 @@ class motorCon:
         self.bus.send(msg)
 
         msg = self.bus.recv()
-        arbID = ((self.axisID << 5) | self.db.get_message_by_name('Heartbeat').frame_id)
+        arbID = ((self.axis << 5) | self.db.get_message_by_name('Heartbeat').frame_id)
 
         while(not (msg.arbitration_id == arbID and msg.data[0] & 0x01)):
             print("waiting")
