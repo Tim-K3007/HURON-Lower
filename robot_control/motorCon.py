@@ -37,7 +37,7 @@ class motorCon:
             msg = self.bus.recv()
             if msg.arbitration_id == arbID:
                 print(msg.arbitration_id)
-                print(msg.data[0])
+                print(msg.data)
             # print("waiting to go to " +  str(pos))
         print("done with going to " + str(pos))
 
