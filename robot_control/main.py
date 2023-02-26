@@ -16,15 +16,24 @@ time.sleep(1)
 #         left_knee.move_motor(0, 0, 0)
 #         left_roll.move_motor(-5, 0, 0)
 
-left_knee.move_motor(10, 0, 0) 
-left_roll.move_motor(5, 0, 0)
-time.sleep(10)
+done = False
+
+while not done:
+    knee_done = left_knee.move_motor(10, 0, 0) 
+    hip_done = left_roll.move_motor(5, 0, 0)
+    done = knee_done and hip_done
+done = False
+
+# time.sleep(10)
 # left_knee.move_motor(0, 0, 0)
 # left_roll.move_motor(-5, 0, 0)
 
-left_knee.move_motor(0, 0, 0)
-left_roll.move_motor(0, 0, 0)
+while not done:
+    left_knee.move_motor(0, 0, 0)
+    left_roll.move_motor(0, 0, 0)
+    done = knee_done and hip_done
+done = False
 
-time.sleep(10)
+# time.sleep(10)
 left_roll.kill_motor()
 left_knee.kill_motor()

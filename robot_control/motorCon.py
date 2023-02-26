@@ -41,10 +41,15 @@ class motorCon:
         #         print(msg.data)
         #     # print("waiting to go to " +  str(pos))
 
-        while(not msg.arbitration_id == arbID):
-            time.sleep(0.15)
-            msg = self.bus.recv()
-        print("done with going to " + str(pos))
+        # while(not msg.arbitration_id == arbID):
+        #     time.sleep(0.15)
+        #     msg = self.bus.recv()
+        # print("done with going to " + str(pos))
+
+        if(not msg.arbitration_id == arbID):
+            return False
+        else:
+            return True
 
 
     def kill_motor(self):
