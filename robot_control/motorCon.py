@@ -34,9 +34,11 @@ class motorCon:
         print(msg.arbitration_id)
         # use a better print here besides waiting
         while(not (msg.arbitration_id == arbID and msg.data[0] & 0x01)):
+            msg = self.bus.recv()
+            print(msg.arbitration_id)
             time.sleep(0.15)
-            print("waiting to go to" +  str(pos))
-        print("done with going to" + str(pos))
+            # print("waiting to go to " +  str(pos))
+        print("done with going to " + str(pos))
 
 
     def kill_motor(self):
