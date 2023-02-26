@@ -31,10 +31,12 @@ class motorCon:
         # not working maybe add a sleep here
         msg = self.bus.recv()
         arbID = ((self.axis << 5) | self.db.get_message_by_name('Heartbeat').frame_id)
+        print(msg)
         # use a better print here besides waiting
         while(not (msg.arbitration_id == arbID and msg.data[0] & 0x01)):
-            print("waiting")
-        print("done")
+            time.sleep(0.15)
+            print("waiting to go to" + pos)
+        print("done with going to" + pos)
 
 
     def kill_motor(self):
