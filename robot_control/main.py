@@ -2,11 +2,13 @@ from motorCon import motorCon
 import time
 
 left_roll = motorCon("can0", 0x1)
+time.sleep(0.1)
 left_knee = motorCon("can0", 0x0)
 time.sleep(15)
 left_roll.set_up()
+time.sleep(0.1)
 left_knee.set_up()
-time.sleep(1)
+time.sleep(0.1)
 
 # for x in range(10):
 #     if x % 2 == 0:
