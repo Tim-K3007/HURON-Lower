@@ -47,8 +47,10 @@ class motorCon:
         #     msg = self.bus.recv()
         # print("done with going to " + str(pos))
         
-        print(msg.arbitration_id)
-        print(msg.data[6])
+        if msg.arbitration_id == arbID:
+            print(msg.arbitration_id)
+            print("data")
+            print(msg.data[6])
 
         return msg.arbitration_id == arbID and msg.data[6] != 0
 
