@@ -21,6 +21,7 @@ done = False
 while not done:
     knee_done = left_knee.move_motor(10, 0, 0) 
     hip_done = left_roll.move_motor(5, 0, 0)
+
     done = knee_done and hip_done
 done = False
 
@@ -29,8 +30,8 @@ done = False
 # left_roll.move_motor(-5, 0, 0)
 
 while not done:
-    left_knee.move_motor(0, 0, 0)
-    left_roll.move_motor(0, 0, 0)
+    knee_done = left_knee.move_motor(0, 0, 0)
+    hip_done = left_roll.move_motor(0, 0, 0)
     done = knee_done and hip_done
 done = False
 
