@@ -20,7 +20,7 @@ class motorCon:
         print("Entering closed loop")
         time.sleep(1)
         
-        self.send_cmd('Set_Limits', {'Velocity_Limit':6.0, 'Current_Limit':70.0})
+        self.send_cmd('Set_Limits', {'Velocity_Limit':2.0, 'Current_Limit':70.0})
 
     def move_motor(self, pos, vel, tor):
         msg = self.db.get_message_by_name('Set_Input_Pos')
