@@ -47,10 +47,7 @@ class motorCon:
         #     msg = self.bus.recv()
         # print("done with going to " + str(pos))
 
-        if(not msg.arbitration_id == arbID):
-            return False
-        else:
-            return True
+        return msg.arbitration_id == arbID and msg.data[6] != 0
 
     def kill_motor(self):
         self.change_state("idle")

@@ -19,21 +19,21 @@ time.sleep(1)
 left_knee.move_motor(10, 0, 0) 
 left_roll.move_motor(5, 0, 0)
 
-# done = False
-# while not done:
-#     done = left_knee.check_heartbeat() and left_roll.check_heartbeat()
+done = False
+while not done:
+    done = left_knee.check_heartbeat() and left_roll.check_heartbeat()
 
-time.sleep(10)
+# time.sleep(10)
 # left_knee.move_motor(0, 0, 0)
 # left_roll.move_motor(-5, 0, 0)
 
 left_knee.move_motor(0, 0, 0) 
 left_roll.move_motor(0, 0, 0)
 
-# done = False
-# while not done:
-#     done = left_knee.check_heartbeat() and left_roll.check_heartbeat()
+done = False
+while not done:
+    done = left_knee.check_heartbeat() and left_roll.check_heartbeat()
 
-time.sleep(10)
+# time.sleep(10)
 left_roll.kill_motor()
 left_knee.kill_motor()
