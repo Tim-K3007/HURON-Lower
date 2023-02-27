@@ -28,6 +28,7 @@ class motorCon:
         msg = can.Message(arbitration_id=self.axis << 5 | msg.frame_id, data=data, is_extended_id=False)
         self.bus.send(msg)
 
+    def check_heartbeat(self):
         # not working maybe add a sleep here
         msg = self.bus.recv()
         arbID = ((self.axis << 5) | self.db.get_message_by_name('Heartbeat').frame_id)
@@ -50,7 +51,6 @@ class motorCon:
             return False
         else:
             return True
-
 
     def kill_motor(self):
         self.change_state("idle")
