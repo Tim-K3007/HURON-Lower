@@ -31,7 +31,7 @@ class motorCon:
     def check_heartbeat(self):
         # not working maybe add a sleep here
         msg = self.bus.recv()
-        arbID = ((self.axis << 5) | self.db.get_message_by_name('Heartbeat').frame_id)
+        arbID = ((self.axis << 5) | self.db.get_message_by_name('Get_Encoder_Count').frame_id)
         # use a better print here besides waiting
 
         # while(not (msg.arbitration_id == arbID and msg.data[0] & 0x01)):
@@ -48,7 +48,7 @@ class motorCon:
         # print("done with going to " + str(pos))
         
         if msg.arbitration_id == arbID:
-            print(msg.data[4])
+            print(msg.data)
 
         return msg.arbitration_id == arbID and msg.data[6] != 0
 
