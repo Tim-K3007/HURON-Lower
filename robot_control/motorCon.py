@@ -50,7 +50,7 @@ class motorCon:
         if msg.arbitration_id == arbID:
             print(msg.data)
 
-        return msg.arbitration_id == arbID and msg.data[6] != 0
+        # return msg.arbitration_id == arbID and msg.data[6] != 0
 
     def kill_motor(self):
         self.change_state("idle")
