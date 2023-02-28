@@ -48,9 +48,9 @@ class motorCon:
         # print("done with going to " + str(pos))
 
         if msg.arbitration_id == arbID:
-            print(arbID)
-            print("data")
-            print(msg.data)
+            # print(arbID)
+            # print("data")
+            print(msg.data[4])
 
         # return msg.arbitration_id == arbID and msg.data[6] != 0
 
