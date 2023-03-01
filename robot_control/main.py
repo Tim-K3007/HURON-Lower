@@ -18,7 +18,7 @@ time.sleep(0.1)
 #         left_knee.move_motor(0, 0, 0)
 #         left_roll.move_motor(-5, 0, 0)
 
-left_knee.move_motor(10, 0, 0) 
+left_knee.move_motor(5, 0, 0) 
 # left_roll.move_motor(5, 0, 0)
 
 done = False
