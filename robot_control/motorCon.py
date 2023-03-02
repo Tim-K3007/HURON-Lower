@@ -54,6 +54,7 @@ class motorCon:
         print("killed motor")
 
     def send_cmd(self, name_of_command, input):
+        time.sleep(0.5)
         msg = self.db.get_message_by_name(name_of_command)
         data = msg.encode(input)
         msg = can.Message(arbitration_id=self.axis << 5 |
