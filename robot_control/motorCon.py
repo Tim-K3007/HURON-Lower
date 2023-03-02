@@ -50,7 +50,8 @@ class motorCon:
         if msg.arbitration_id == arbID:
             # print(arbID)
             # print("data")
-            print(msg.data[: 3])
+            pos = self.db.decode_message('Get_Encoder_Estimates', msg.data)['Pos_Estimate']
+            print(pos)
 
         # return msg.arbitration_id == arbID and msg.data[6] != 0
 
