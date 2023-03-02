@@ -39,7 +39,7 @@ def move_legs(left_hip_yaw, left_hip_pitch, left_hip_roll, left_knee,
     while not done:
         i += 1
         done = left_roll_motor.check_if_there() and left_knee_motor.check_if_there() and right_roll_motor.check_if_there() and right_knee_motor.check_if_there()
-        if not done and i == 100:
+        if not done and i == 500:
             print("fuck")
             print(left_roll_motor.check_if_there())
             print(left_knee_motor.check_if_there())
@@ -47,7 +47,7 @@ def move_legs(left_hip_yaw, left_hip_pitch, left_hip_roll, left_knee,
             print(right_knee_motor.check_if_there())
             done = True
 
-move_legs(0, 0, 5, 10, 0, 0, -5, 5)
+move_legs(0, 0, 5, 10, 0, 0, 0, 0)
 time.sleep(2)
 move_legs(0, 0, 0, 0, 0, 0, 0, 0)
 
