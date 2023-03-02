@@ -28,7 +28,7 @@ class motorCon:
         msg = can.Message(arbitration_id=self.axis << 5 | msg.frame_id, data=data, is_extended_id=False)
         self.bus.send(msg)
 
-    def check_heartbeat(self):
+    def check_if_there(self):
         # not working maybe add a sleep here
         msg = self.bus.recv()
         arbID = ((self.axis << 5) | self.db.get_message_by_name('Get_Encoder_Estimates').frame_id)
@@ -50,7 +50,7 @@ class motorCon:
         if msg.arbitration_id == arbID:
             # print(arbID)
             # print("data")
-            print(msg.data)
+            print(msg.data[: 3])
 
         # return msg.arbitration_id == arbID and msg.data[6] != 0
 
@@ -63,6 +63,7 @@ class motorCon:
         data = msg.encode(input)
         msg = can.Message(arbitration_id=self.axis << 5 | msg.frame_id, is_extended_id=False, data=data)
         self.bus.send(msg)
+        time.sleep(0.1)
 
     def change_state(self, s):
         try:
