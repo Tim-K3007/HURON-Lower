@@ -35,19 +35,28 @@ def move_legs(left_hip_yaw, left_hip_pitch, left_hip_roll, left_knee,
     right_roll_motor.move_motor(-1*right_hip_roll, 0, 0)
     right_knee_motor.move_motor(-1*right_knee, 0, 0)
 
-    i = 0
+    # left roll and left knee
+    lr_flag = False
+    lk_flag = False
+
+    rr_flag = False
+    rk_flag = False
+
     done = False
     while not done:
-        i += 1
-        done = left_roll_motor.check_if_there() and left_knee_motor.check_if_there() and right_roll_motor.check_if_there() and right_knee_motor.check_if_there()
-        # print(done)
-        # if not done and i == 10000:
-        #     print("fuck")
-        #     # print(left_roll_motor.check_if_there())
-        #     # print(left_knee_motor.check_if_there())
-        #     # print(right_roll_motor.check_if_there())
-        #     # print(right_knee_motor.check_if_there())
-        #     done = True
+        if left_roll_motor.check_if_there():
+            lr_flag = True
+        
+        if left_knee_motor.check_if_there():
+            lk_flag = True
+
+        if right_roll_motor.check_if_there():
+            rr_flag = True
+
+        if right_knee_motor.check_if_there():
+            rk_flag = True
+            
+        done = lr_flag and lk_flag and rr_flag and rk_flag
 
 move_legs(0, 0, 5, 10, 0, 0, -5, 5)
 # move_legs(0, 0, 5, 10, 0, 0, 0, 0)
