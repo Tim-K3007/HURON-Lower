@@ -55,12 +55,15 @@ def move_legs(left_hip_yaw, left_hip_pitch, left_hip_roll, left_knee,
 
         if right_knee_motor.check_if_there():
             rk_flag = True
-            
+
         done = lr_flag and lk_flag and rr_flag and rk_flag
 
-move_legs(0, 0, 5, 10, 0, 0, -5, 5)
-# move_legs(0, 0, 5, 10, 0, 0, 0, 0)
-time.sleep(2)
+for x in range(4):
+    move_legs(0, 0, 5, 10, 0, 0, -5, 5)
+    time.sleep(1)
+    move_legs(0, 0, -5, 5, 0, 0, 5, 10)
+    time.sleep(1)
+
 move_legs(0, 0, 0, 0, 0, 0, 0, 0)
 
 left_roll_motor.kill_motor()
