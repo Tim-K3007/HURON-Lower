@@ -29,8 +29,10 @@ def move_legs(left_hip_yaw, left_hip_pitch, left_hip_roll, left_knee,
     
     left_roll_motor.move_motor(left_hip_roll, 0, 0)
     left_knee_motor.move_motor(left_knee, 0, 0)
-    right_roll_motor.move_motor(right_hip_roll, 0, 0)
-    right_knee_motor.move_motor(right_knee, 0, 0)
+
+    # right leg calibrates in opposite direction
+    right_roll_motor.move_motor(-1*right_hip_roll, 0, 0)
+    right_knee_motor.move_motor(-1*right_knee, 0, 0)
 
     done = False
     while not done:
