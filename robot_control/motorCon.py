@@ -9,6 +9,7 @@ class motorCon:
         self.bus = can.Bus(canID, bustype="socketcan")
         self.axis = axisID
         self.states = {"idle": 0x01, "calib": 0x03, "closeloop": 0x08}
+        self.desired_pos = 0
 
         self.change_state("calib")
         print("Calibrating...")
@@ -23,37 +24,24 @@ class motorCon:
         self.send_cmd('Set_Limits', {'Velocity_Limit':6.0, 'Current_Limit':70.0})
 
     def move_motor(self, pos, vel, tor):
+        self.desired_pos = pos
+
         msg = self.db.get_message_by_name('Set_Input_Pos')
         data = msg.encode({'Input_Pos':pos, 'Vel_FF':vel, 'Torque_FF':tor})
         msg = can.Message(arbitration_id=self.axis << 5 | msg.frame_id, data=data, is_extended_id=False)
         self.bus.send(msg)
 
     def check_if_there(self):
-        # not working maybe add a sleep here
         msg = self.bus.recv()
         arbID = ((self.axis << 5) | self.db.get_message_by_name('Get_Encoder_Estimates').frame_id)
-        # use a better print here besides waiting
 
-        # while(not (msg.arbitration_id == arbID and msg.data[0] & 0x01)):
-        #     time.sleep(0.15)
-        #     msg = self.bus.recv()
-        #     if msg.arbitration_id == arbID:
-        #         print(msg.arbitration_id)
-        #         print(msg.data)
-        #     # print("waiting to go to " +  str(pos))
-
-        # while(not msg.arbitration_id == arbID):
-        #     time.sleep(0.15)
-        #     msg = self.bus.recv()
-        # print("done with going to " + str(pos))
+        flag = False
 
         if msg.arbitration_id == arbID:
-            # print(arbID)
-            # print("data")
             pos = self.db.decode_message('Get_Encoder_Estimates', msg.data)['Pos_Estimate']
-            print(pos)
+            return abs(pos - self.desired_pos) <= 0.02
 
-        # return msg.arbitration_id == arbID and msg.data[6] != 0
+        return flag
 
     def kill_motor(self):
         self.change_state("idle")
