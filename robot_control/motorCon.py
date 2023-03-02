@@ -24,7 +24,7 @@ class motorCon:
         time.sleep(1)
 
         self.send_cmd(
-            'Set_Limits', {'Velocity_Limit': 4.0, 'Current_Limit': 70.0})
+            'Set_Limits', {'Velocity_Limit': 6.0, 'Current_Limit': 70.0})
 
     def move_motor(self, pos, vel, tor):
         self.desired_pos = pos
@@ -54,7 +54,6 @@ class motorCon:
         print("killed motor")
 
     def send_cmd(self, name_of_command, input):
-        time.sleep(0.5)
         msg = self.db.get_message_by_name(name_of_command)
         data = msg.encode(input)
         msg = can.Message(arbitration_id=self.axis << 5 |
