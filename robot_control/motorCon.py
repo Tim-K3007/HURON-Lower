@@ -59,7 +59,6 @@ class motorCon:
         msg = can.Message(arbitration_id=self.axis << 5 |
                           msg.frame_id, is_extended_id=False, data=data)
         self.bus.send(msg)
-        time.sleep(0.1)
 
     def change_state(self, s):
         try:
