@@ -50,7 +50,7 @@ class motorCon:
         if msg.arbitration_id == arbID:
             # print(arbID)
             # print("data")
-            print(msg.data[0])
+            print(msg.data)
 
         # return msg.arbitration_id == arbID and msg.data[6] != 0
 
