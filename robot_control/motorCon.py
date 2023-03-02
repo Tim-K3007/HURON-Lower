@@ -2,6 +2,7 @@ import can
 import cantools
 import time
 
+
 class motorCon:
 
     def __init__(self, canID, axisID):
@@ -15,30 +16,35 @@ class motorCon:
         print("Calibrating...")
 
     def set_up(self):
-        self.send_cmd('Set_Controller_Mode', {'Input_Mode':1, 'Control_Mode':3})
+        self.send_cmd('Set_Controller_Mode', {
+                      'Input_Mode': 1, 'Control_Mode': 3})
 
         self.change_state("closeloop")
         print("Entering closed loop")
         time.sleep(1)
-        
-        self.send_cmd('Set_Limits', {'Velocity_Limit':6.0, 'Current_Limit':70.0})
+
+        self.send_cmd(
+            'Set_Limits', {'Velocity_Limit': 6.0, 'Current_Limit': 70.0})
 
     def move_motor(self, pos, vel, tor):
         self.desired_pos = pos
 
         msg = self.db.get_message_by_name('Set_Input_Pos')
-        data = msg.encode({'Input_Pos':pos, 'Vel_FF':vel, 'Torque_FF':tor})
-        msg = can.Message(arbitration_id=self.axis << 5 | msg.frame_id, data=data, is_extended_id=False)
+        data = msg.encode({'Input_Pos': pos, 'Vel_FF': vel, 'Torque_FF': tor})
+        msg = can.Message(arbitration_id=self.axis << 5 |
+                          msg.frame_id, data=data, is_extended_id=False)
         self.bus.send(msg)
 
     def check_if_there(self):
         msg = self.bus.recv()
-        arbID = ((self.axis << 5) | self.db.get_message_by_name('Get_Encoder_Estimates').frame_id)
+        arbID = ((self.axis << 5) | self.db.get_message_by_name(
+            'Get_Encoder_Estimates').frame_id)
 
         flag = False
 
         if msg.arbitration_id == arbID:
-            pos = self.db.decode_message('Get_Encoder_Estimates', msg.data)['Pos_Estimate']
+            pos = self.db.decode_message('Get_Encoder_Estimates', msg.data)[
+                'Pos_Estimate']
             return abs(pos - self.desired_pos) <= 0.02
 
         return flag
@@ -50,7 +56,8 @@ class motorCon:
     def send_cmd(self, name_of_command, input):
         msg = self.db.get_message_by_name(name_of_command)
         data = msg.encode(input)
-        msg = can.Message(arbitration_id=self.axis << 5 | msg.frame_id, is_extended_id=False, data=data)
+        msg = can.Message(arbitration_id=self.axis << 5 |
+                          msg.frame_id, is_extended_id=False, data=data)
         self.bus.send(msg)
         time.sleep(0.1)
 
@@ -60,6 +67,5 @@ class motorCon:
         except:
             print("unknown state" + s + "inputed into change_state()")
 
-        self.send_cmd('Set_Axis_State', {'Axis_Requested_State': self.states[s]})
-
-            
+        self.send_cmd('Set_Axis_State', {
+                      'Axis_Requested_State': self.states[s]})
