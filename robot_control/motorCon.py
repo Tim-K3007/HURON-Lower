@@ -24,7 +24,7 @@ class motorCon:
         time.sleep(1)
 
         self.send_cmd(
-            'Set_Limits', {'Velocity_Limit': 6.0, 'Current_Limit': 70.0})
+            'Set_Limits', {'Velocity_Limit': 4.0, 'Current_Limit': 70.0})
 
     def move_motor(self, pos, vel, tor):
         self.desired_pos = pos
