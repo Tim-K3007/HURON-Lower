@@ -48,7 +48,7 @@ class motorCon:
             # print("pos")
             # print(pos)
             # print("error")
-            print(abs(pos - self.desired_pos))
+            # print(abs(pos - self.desired_pos))
             return abs(pos - self.desired_pos) <= 1
 
         return flag
