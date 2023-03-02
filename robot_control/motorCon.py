@@ -45,7 +45,7 @@ class motorCon:
         if msg.arbitration_id == arbID:
             pos = self.db.decode_message('Get_Encoder_Estimates', msg.data)[
                 'Pos_Estimate']
-            return abs(pos - self.desired_pos) <= 0.02
+            return abs(pos - self.desired_pos) <= 1
 
         return flag
 
