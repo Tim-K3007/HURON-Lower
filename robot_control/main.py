@@ -58,7 +58,7 @@ def move_legs(left_hip_yaw, left_hip_pitch, left_hip_roll, left_knee,
 
         done = lr_flag and lk_flag and rr_flag and rk_flag
 
-for x in range(4):
+for x in range(2):
     move_legs(0, 0, 5, 10, 0, 0, -5, 5)
     time.sleep(1)
     move_legs(0, 0, -5, 5, 0, 0, 5, 10)
